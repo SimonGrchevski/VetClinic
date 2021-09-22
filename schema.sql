@@ -9,10 +9,10 @@ CREATE TABLE animals (
     escape_attempts int,
     neutered boolean,
     weight_kg decimal,
-    species char(50)
 );
 
-
+ALTER TABLE animals
+ADD species char(50);
 
 -- Inside a transaction update the animals table by setting the species column to unspecified. Verify that change was made. Then roll back the change and verify that species columns went back to the state before tranasction.
 

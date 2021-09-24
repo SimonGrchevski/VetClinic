@@ -38,13 +38,13 @@ ALTER TABLE animals
 ADD owner_id int;
 
 ALTER TABLE animals
-ADD CONSTRAINT constraint_fk
+ADD CONSTRAINT constraint_species
 FOREIGN KEY (species_id)
 REFERENCES species(id)
 ON DELETE CASCADE;
 
 ALTER TABLE animals
-ADD CONSTRAINT constraint_fk
+ADD CONSTRAINT constraint_owners
 FOREIGN KEY (owner_id)
 REFERENCES owners(id)
 ON DELETE CASCADE;

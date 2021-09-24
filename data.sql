@@ -42,8 +42,8 @@ WHERE name = 'Angemon' OR name = 'Boarmon';
 
 UPDATE animals
 SET species_id = 2
-WHERE name LIKE '%mon';
+WHERE name like '%mon';
 
 UPDATE animals
-SET species_id = 1
-WHERE name NOT LIKE '%mon';
+SET species_id = 1 
+WHERE species_id IS NULL;

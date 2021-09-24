@@ -63,14 +63,42 @@ FROM animals;
 SELECT species, AVG(escape_attempts) 
 FROM animals
 WHERE date_of_birth >= '1990-01-01' AND date_of_birth <= '2000-12-31'
-GROUP BY species; 
+GROUP BY species;
 
+                  -- Milestone 3
+-- What animals belong to Melody Pond?
+SELECT name 
+FROM animals 
+JOIN owners ON animals.owner_id = owners.id 
+WHERE full_name = 'Melody Pond';
+-- List of all animals that are pokemon (their type is Pokemon)
+SELECT animals.name, species.name as animal_breed 
+FROM animals 
+JOIN species ON  animals.species_id = species.id where species.id = 1;
+-- List all owners and their animals, remember to include those that don't own any animal.
+SELECT owners.full_name,animals.name as animal_name 
+FROM owners 
+LEFT JOIN animals ON  owners.id = animals.owner_id;
+-- List all Digimon owned by Jennifer Orwell.
+SELECT animals.name 
+FROM owners 
+JOIN animals ON owners.id = animals.owner_id 
+WHERE owners.full_name = 'Jennifer Orwell' AND animals.name='Digimon';
 
+-- List all animals owned by Dean Winchester that haven't tried to escape.
+SELECT animals.name 
+FROM owners 
+JOIN animals ON owners.id = animals.owner_id 
+WHERE owners.full_name = 'Dean Winchester' AND animals.escape_attempts=0;
 
-
-
+-- Who owns the most animals?
+SELECT owners.full_name,count(animals.name) as animals_count
+FROM owners
+JOIN animals ON owners.id = animals.owner_id 
+GROUP BY owners.full_name
+ORDER BY animals_count DESC
+LIMIT 1;
 -- Inside a transaction update the animals table by setting the species column to unspecified. Verify that change was made. Then roll back the change and verify that species columns went back to the state before tranasction.
-
 BEGIN;
 SELECT * FROM animals;
 UPDATE animals SET species = 'unspecified';

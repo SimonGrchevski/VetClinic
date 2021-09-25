@@ -98,6 +98,62 @@ JOIN animals ON owners.id = animals.owner_id
 GROUP BY owners.full_name
 ORDER BY animals_count DESC
 LIMIT 1;
+
+                  -- Milestone 4
+-- Who was the last animal seen by William Tatcher?
+SELECT animals.name,vets.name,date_of_visit 
+FROM visits 
+JOIN animals ON (animals_id = animals.id)
+JOIN vets ON (vet_id=vets.id)
+WHERE vets.name = 'William Tatcher'
+ORDER BY date_of_visit DESC
+LIMIT 1;
+-- How many different animals did Stephanie Mendez see?
+SELECT vets.name,count(animals) as different_animals
+FROM visits
+JOIN animals ON (animals_id = animals.id)
+JOIN vets ON (vet_id = vets.id)
+WHERE vets.name = 'Stephanie Mendez'
+GROUP BY vets.name;
+-- List all vets and their specialties, including vets with no specialties.
+SELECT vets.name,species.name as speciality
+FROM specializations
+JOIN species on (species_id = species.id)
+right JOIN vets on ( vet_id = vets.id );
+-- List all animals that visited Stephanie Mendez between April 1st and August 30th, 2020.
+SELECT animals.name,date_of_visit
+FROM visits
+JOIN animals ON (animals_id = animals.id)
+JOIN vets ON (vet_id = vets.id)
+WHERE vets.name = 'Stephanie Mendez' AND date_of_visit BETWEEN '2020-04-01' AND '2020-08-30';
+-- What animal has the most visits to vets?
+SELECT animals.name, count(vets.name) as visits
+FROM visits
+JOIN animals ON (animals_id = animals.id)
+JOIN vets ON (vet_id = vets.id)
+GROUP BY animals.name
+ORDER BY visits DESC
+LIMIT 1;
+-- Who was Maisy Smith's first visit?
+SELECT animals.name, date_of_visit
+FROM visits
+JOIN animals ON (animals_id = animals.id)
+JOIN vets ON (vet_id = vets.id)
+WHERE vets.name ='Maisy Smith'
+ORDER BY date_of_visit ASC
+LIMIT 1;
+-- Details for most recent visit: animal information, vet information, and date of visit. 
+SELECT vets.name as vet_name, 
+        vets.age as vet_age,
+        animals.name as ani_name,
+        animals.date_of_birth as ani_birth,
+        animals.escape_attempts as ani_escape_attemps,
+        date_of_visit as visit
+FROM visits
+JOIN animals ON (animals_id = animals.id)
+JOIN vets ON (vet_id = vets.id)
+ORDER BY date_of_visit DESC
+LIMIT 5;
 -- Inside a transaction update the animals table by setting the species column to unspecified. Verify that change was made. Then roll back the change and verify that species columns went back to the state before tranasction.
 BEGIN;
 SELECT * FROM animals;

@@ -39,8 +39,7 @@ CREATE TABLE specializations (
     vet_id int,
     species_id int,
     FOREIGN KEY (vet_id) REFERENCES vets(id),
-    FOREIGN KEY (species_id) REFERENCES species(id),
-    PRIMARY KEY(species_id,vet_id)
+    FOREIGN KEY (species_id) REFERENCES species(id)
 );
 
 DROP TABLE IF EXISTS visits;

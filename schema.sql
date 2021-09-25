@@ -25,6 +25,32 @@ CREATE TABLE species (
     PRIMARY KEY(id)
 );
 
+DROP TABLE IF EXISTS vets;
+CREATE TABLE vets (
+    id int GENERATED ALWAYS AS IDENTITY,
+    name varchar(32),
+    age int,
+    date_of_graduation date,
+    PRIMARY KEY(id)
+);
+
+DROP TABLE IF EXISTS specializations;
+CREATE TABLE specializations (
+    vet_id int,
+    species_id int,
+    FOREIGN KEY (vet_id) REFERENCES vets(id),
+    FOREIGN KEY (species_id) REFERENCES species(id)
+);
+
+DROP TABLE IF EXISTS visits;
+CREATE TABLE visits (
+    animals_id int,
+    vet_id int,
+    date_of_visit date,
+    FOREIGN KEY (animals_id) REFERENCES animals(id),
+    FOREIGN KEY (vet_id) REFERENCES vets(id)
+);
+
 ALTER TABLE animals
 ADD species char(50);
 

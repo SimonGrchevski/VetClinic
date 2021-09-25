@@ -36,10 +36,10 @@ CREATE TABLE vets (
 
 DROP TABLE IF EXISTS specializations;
 CREATE TABLE specializations (
-    species_id int,
     vet_id int,
-    FOREIGN KEY (species_id) REFERENCES species(id),
+    species_id int,
     FOREIGN KEY (vet_id) REFERENCES vets(id),
+    FOREIGN KEY (species_id) REFERENCES species(id),
     PRIMARY KEY(species_id,vet_id)
 );
 

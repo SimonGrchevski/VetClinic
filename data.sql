@@ -36,6 +36,34 @@ VALUES ('Pokemon');
 INSERT INTO species(name)
 VALUES ('Digimon');
 
+INSERT INTO vets(name,age,date_of_graduation)
+VALUES ('William Tatcher',45,'2000-04-23');
+
+INSERT INTO vets(name,age,date_of_graduation)
+VALUES ('Maisy Smith',26,'2019-01-17');
+
+INSERT INTO vets(name,age,date_of_graduation)
+VALUES ('Stephanie Mendez',64,'1981-05-04');
+
+INSERT INTO vets(name,age,date_of_graduation)
+VALUES ('Jack Harkness',38,'2008-06-08');
+
+
+INSERT INTO specializations
+VALUES((SELECT id FROM vets WHERE name='William Tatcher'), 
+       (SELECT id FROM species WHERE name='Pokemon')); 
+
+INSERT INTO specializations
+VALUES((SELECT id FROM vets WHERE name='Stephanie Mendez'), 
+       (SELECT id FROM species WHERE name='Digimon')); 
+
+INSERT INTO specializations
+VALUES((SELECT id FROM vets WHERE name='Stephanie Mendez'), 
+       (SELECT id FROM species WHERE name='Pokemon')); 
+
+INSERT INTO specializations
+VALUES((SELECT id FROM vets WHERE name='Jack Harkness'), 
+       (SELECT id FROM species WHERE name='Digimon')); 
 
 UPDATE animals
 SET owner_id = (SELECT id FROM owners WHERE full_name ='Sam Smith')
@@ -64,3 +92,4 @@ WHERE name like '%mon';
 UPDATE animals
 SET species_id = (SELECT id from species WHERE name = 'Pokemon') 
 WHERE species_id IS NULL;
+

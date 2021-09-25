@@ -30,11 +30,11 @@ CREATE TABLE vets (
     id int GENERATED ALWAYS AS IDENTITY,
     name varchar(32),
     age int,
-    date_of_graduation date
+    date_of_graduation date,
     PRIMARY KEY(id)
 );
 
-DROP TABLE IF EXISTS specializations
+DROP TABLE IF EXISTS specializations;
 CREATE TABLE specializations (
     species_id int,
     vet_id int,
@@ -43,11 +43,11 @@ CREATE TABLE specializations (
     PRIMARY KEY(species_id,vet_id)
 );
 
-DROP TABLE IF EXISTS visits
+DROP TABLE IF EXISTS visits;
 CREATE TABLE visits (
     vet_id int,
     animals_id int,
-    FOREIGN KEY (vet_id) REFERENCES vet(id),
+    FOREIGN KEY (vet_id) REFERENCES vets(id),
     FOREIGN KEY (animals_id) REFERENCES animals(id),
     PRIMARY KEY (vet_id, animals_id)
 );

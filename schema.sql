@@ -45,11 +45,11 @@ CREATE TABLE specializations (
 
 DROP TABLE IF EXISTS visits;
 CREATE TABLE visits (
-    vet_id int,
     animals_id int,
-    FOREIGN KEY (vet_id) REFERENCES vets(id),
+    vet_id int,
+    date_of_visit date,
     FOREIGN KEY (animals_id) REFERENCES animals(id),
-    PRIMARY KEY (vet_id, animals_id)
+    FOREIGN KEY (vet_id) REFERENCES vets(id)
 );
 
 ALTER TABLE animals
